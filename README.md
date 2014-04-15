@@ -90,6 +90,16 @@ def sendMessage(buffer): send some text or binary data to the client endpoint
  
 def sendClose() : send close frame to endpoint
 
+<h4>WebSockPortMapper.py</h4>
+
+simply run ./WebSockPortMapper.py for port mapping I hope it workes but if you want to map an individual port on a host just change host address and port in the following part of the code:
+     def SockFun(self):
+         try:        
+             ms=mysocket()
+             ms.connect("127.0.0.1",7778)
+which in my example is "127.0.0.1" and 7778.
+
+
 
 ---------------------
 The MIT License (MIT)
