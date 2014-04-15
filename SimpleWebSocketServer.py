@@ -21,7 +21,7 @@ class HTTPRequest(BaseHTTPRequestHandler):
 		self.parse_request()
 		
 
-class WebSocket(object):
+class WebSocket(threading.Thread):
 
 	handshakeStr = (
 		"HTTP/1.1 101 Switching Protocols\r\n"
@@ -93,6 +93,21 @@ class WebSocket(object):
 		self.headertoread = 2048 
 		self.headerbuffer = ''
 		self.data = ''
+
+    def CheckThread(self):
+            self.FlagDict["Data"]=self.data
+            print self.FlagDict
+            try:
+                if self.FlagDict["threadexists"]==0:
+                    self.FlagDict["threadexists"]=1
+                    self.ts=threading.Thread(target=self.SockFun)
+                    self.ts.deamon=True
+                    self.ts.start()
+            except Exception as d:
+                print "error in handleMessage",d
+
+    def SockFun(self):
+        pass
 
 
 	def handleMessage(self):
